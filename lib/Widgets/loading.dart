@@ -1,7 +1,6 @@
-import 'dart:convert';
-
+import 'package:InstaClock/services/world_time.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -9,29 +8,22 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  void getTime() async {
-    //make the request call
-    Response response =
-        await get("http://worldtimeapi.org/api/timezone/Africa/Lagos");
-    Map data = jsonDecode(response.body);
-    print(data);
+  String time = "loading";
 
-    //get properties from data
-    String datetime = data["datetime"];
-    String offset = data["utc_offset"].substring(1, 3);
-    // print(datetime);
-    // print(offset);
-
-    //create a datetime object
-    DateTime now = DateTime.parse(datetime);
-    now = now.add(Duration(hours: int.parse(offset)));
-    print(now);
+  void setUpWorldTime() async {
+    WorldTime instance = WorldTime(
+        location: "Berlin", flag: "nigeria.png", url: "Europe/Berlin");
+    await instance.getTime();
+    print(instance.time);
+    setState(() {
+      time = instance.time;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    getTime();
+    setUpWorldTime();
   }
 
   @override
@@ -39,14 +31,25 @@ class _LoadingState extends State<Loading> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Icon(Icons.menu, color: Colors.black),
+        leading: Icon(FontAwesomeIcons.clock, color: Colors.black),
         title: Text(
           "InstaClock",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
       ),
-      body: Text("Loading Screen"),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(50.0),
+          child: Text(
+            "$time",
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

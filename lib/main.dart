@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "InstaClock",
-      initialRoute: "/homePage",
+      initialRoute: "/",
       routes: {
         "/": (context) => Loading(),
         "/homePage": (context) => HomePage(),

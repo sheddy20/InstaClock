@@ -30,6 +30,7 @@ dependencies:
   font_awesome_flutter:
   http: ^0.12.2
   intl: ^0.16.1
+  flutter_spinkit: ^4.1.2+1
   get: ^3.24.0
   curved_navigation_bar: ^0.3.7
   intro_views_flutter: ^2.8.2

@@ -1,5 +1,6 @@
 import 'package:InstaClock/services/world_time.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -37,15 +38,9 @@ class _LoadingState extends State<Loading> {
       //   centerTitle: true,
       // ),
       body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(50.0),
-          child: Text(
-            "Loading",
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+        child: SpinKitWave(
+          color: Colors.green,
+          size: 60.0,
         ),
       ),
     );

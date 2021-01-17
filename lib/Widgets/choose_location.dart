@@ -10,7 +10,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.indigo[800],
         title: Text("Choose A Location"),
         elevation: 0.0,
         centerTitle: true,

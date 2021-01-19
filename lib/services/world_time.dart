@@ -35,7 +35,7 @@ class WorldTime {
       time = DateFormat.jm().format(now);
     } catch (e) {
       print("No such method: $e");
-      time = "Could not get the time data...";
+      time = "404";
     }
   }
 }

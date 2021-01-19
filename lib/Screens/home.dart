@@ -10,29 +10,38 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context).settings.arguments;
+    data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
     print(data);
 
-    String bgroundImages = data["isDaytime"] ? "sky.png" : "nights.png";
-    Color bgColor = data["isDaytime"] ? Colors.blue : Colors.black;
+    // String bgroundImages = data["isDaytime"] ? "sky.png" : "nights.png";
+    // Color bgColor = data["isDaytime"] ? Colors.blue : Colors.black;
 
     return Scaffold(
-      backgroundColor: bgColor,
+      // backgroundColor: bgColor,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("Asset/$bgroundImages"),
-              fit: BoxFit.cover,
-            ),
-          ),
+              // image: DecorationImage(
+              //   image: AssetImage("Asset/$bgroundImages"),
+              //   fit: BoxFit.cover,
+              // ),
+              ),
           child: Padding(
             padding: EdgeInsets.fromLTRB(0, 120.0, 0.0, 0.0),
             child: Column(
               children: [
                 FlatButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/location");
+                  onPressed: () async {
+                    dynamic result =
+                        await Navigator.pushNamed(context, "/location");
+                    setState(() {
+                      data = {
+                        "time": result["time"],
+                        "location": result["location"],
+                        "flag": result["flag"],
+                        "isDaytime": result["isDaytime"],
+                      };
+                    });
                   },
                   icon: Icon(Icons.edit_location),
                   label: Text("Edit Location"),
